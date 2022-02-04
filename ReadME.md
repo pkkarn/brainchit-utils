@@ -12,7 +12,7 @@ But we will `recommend` you to use this function with only specially defined wor
 e.g
 
 ```
-const { filterQuery } = require('./index');
+const { filterQuery } = require('brainchit-utils');
 
 const testString = `
 My name is karn
