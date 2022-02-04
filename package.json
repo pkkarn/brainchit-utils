@@ -1,0 +1,11 @@
+{
+  "name": "brainchit-utils",
+  "version": "1.0.0",
+  "description": "A package of useful and reusable functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PK Karn",
+  "license": "ISC"
+}
