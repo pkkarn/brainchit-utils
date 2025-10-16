@@ -193,3 +193,7 @@ Auto-deployment to server via GitHub Actions when pushing to `main` branch.
 ## License
 
 ISC
+
+---
+
+TEST OK
