@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "Brainchit Neuron",
+    "description": "Brainchit Utils API - Node.js utility server with MongoDB for data management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:7000",
+      "type": "string"
+    },
+    {
+      "key": "master_key",
+      "value": "Asudye3hu332",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "General",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "API root endpoint - returns service information"
+          },
+          "response": []
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api-docs",
+              "host": ["{{base_url}}"],
+              "path": ["api-docs"]
+            },
+            "description": "Swagger UI documentation"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health - Nutrition",
+      "item": [
+        {
+          "name": "Store Nutrition Data (All Fields)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-master-key",
+                "value": "{{master_key}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCalorie\": 2000,\n  \"totalProtien\": 150,\n  \"totalFats\": 60,\n  \"totalCarbs\": 250\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Store nutrition tracking data with all fields"
+          },
+          "response": []
+        },
+        {
+          "name": "Store Nutrition Data (Required Only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-master-key",
+                "value": "{{master_key}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCalorie\": 1800,\n  \"totalProtien\": 120\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Store nutrition data with only required fields (totalCalorie and totalProtien)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Nutrition Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-master-key",
+                "value": "{{master_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Retrieve all stored nutrition data entries"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Cases",
+      "item": [
+        {
+          "name": "Test Auth Failure (No Key)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCalorie\": 2000,\n  \"totalProtien\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Test authentication failure - should return 401 Unauthorized"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Auth Failure (Wrong Key)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-master-key",
+                "value": "wrong-key-12345",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCalorie\": 2000,\n  \"totalProtien\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Test authentication failure with wrong key - should return 403 Forbidden"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Missing Required Field",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-master-key",
+                "value": "{{master_key}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCalorie\": 2000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/health/nutrition",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health", "nutrition"]
+            },
+            "description": "Test missing required field (totalProtien) - should return 400 Bad Request"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
