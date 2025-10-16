@@ -21,14 +21,12 @@ jobs:
           script: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            export PATH="$HOME/.nvm/versions/node/$(nvm version)/bin:$PATH"
-            export PATH="$(npm config get prefix)/bin:$PATH"
             cd ${{ secrets.DEPLOY_PATH || '/home/azureuser/brainchit-utils' }}
             echo "📦 Pulling latest code from main branch..."
             git pull origin main
             echo "📥 Installing dependencies..."
             npm install --production
             echo "🔄 Restarting PM2 process..."
-            pm2 restart brainchit-utils || pm2 start server.js --name brainchit-utils
+            npx pm2 restart brainchit-utils || npx pm2 start server.js --name brainchit-utils
             echo "✅ Deployment complete!"
-            pm2 status
+            npx pm2 status
