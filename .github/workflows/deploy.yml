@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-            cd ${{ secrets.DEPLOY_PATH || '~/brainchit-utils' }}
+            cd ${{ secrets.DEPLOY_PATH || '/home/azureuser/brainchit-utils' }}
             echo "📦 Pulling latest code from main branch..."
             git pull origin main
             echo "📥 Installing dependencies..."
