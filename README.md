@@ -179,6 +179,17 @@ docker volume rm mongodb_data
 - Swagger (API docs)
 - Docker (for MongoDB)
 
+## Deployment
+
+Auto-deployment to server via GitHub Actions when pushing to `main` branch.
+
+**Setup:** See [DEPLOY.md](DEPLOY.md) for complete deployment instructions.
+
+**Quick summary:**
+1. Configure GitHub Secrets (SSH credentials)
+2. Setup server with PM2
+3. Push to `main` branch → auto-deploys
+
 ## License
 
 ISC
